@@ -1,0 +1,52 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	background-color: #00114d;
+	color: rgb(201, 212, 250);
+}
+
+header,
+main {
+	width: 80%;
+	max-width: 400px;
+	margin: 0 auto;
+}
+
+header {
+	margin-top: 24px;
+	margin-bottom: 24px;
+}
+
+.main--instructions-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.main--instructions-container .main--paragraph {
+	margin-top: 8px;
+}
+
+.main--instructions-container input {
+	margin-top: 16px;
+	width: 80%;
+	height: 20px;
+	text-align: center;
+	background-color: aliceblue;
+	color: #00114d;
+}
+
+form {
+	margin-top: 24px;
+	display: flex;
+	flex-direction: column;
+}

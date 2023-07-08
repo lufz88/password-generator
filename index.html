@@ -14,26 +14,28 @@
     <p class="header--paragraph">Generate your secure password!</p>
   </header>
   <main>
-    <p class="main--paragraph">Your password is: <span>here will appear your password</span></p>
     <section class="main--instructions-container">
       <ol class="instructions-container--list">
         <li class="list--item">Select the lenght of the password</li>
         <li class="list--item">Select what type of characters you want</li>
         <li class="list--item">Then, click the button to generate your secure password</li>
       </ol>
+      <p class="main--paragraph">Your password is:</p>
+      <input type="text" disabled id="password"></input>
+      <button type="button" id="copy-to-clipboard">Copy to clipboard</button>
     </section>
     <section>
-      <form>
+      <form id="form">
         <label for="">
-          <input type="range" min="10" max="100">
-          Lenght
+          <input type="range" name="length" min="10" max="100" id="length">
+          Length: <span id="show-length"></span>
         </label>
         <label for="low-letters">
-          <input type="checkbox" name="letters" id="low-letters">
+          <input type="checkbox" name="lowLetters" id="low-letters">
           LowerCase Letters
         </label>
         <label for="up-letters">
-          <input type="checkbox" name="letters" id="up-letters">
+          <input type="checkbox" name="upLetters" id="up-letters">
           UpperCase Letters
         </label>
         <label for="numbers">
