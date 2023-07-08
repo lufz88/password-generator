@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/styles.css">
+  <title>Password Generator</title>
+</head>
+
+<body>
+  <header>
+    <h1 class="header--title">Password Generator</h1>
+    <p class="header--paragraph">Generate your secure password!</p>
+  </header>
+  <main>
+    <p class="main--paragraph">Your password is: <span>here will appear your password</span></p>
+    <section class="main--instructions-container">
+      <ol class="instructions-container--list">
+        <li class="list--item">Select the lenght of the password</li>
+        <li class="list--item">Select what type of characters you want</li>
+        <li class="list--item">Then, click the button to generate your secure password</li>
+      </ol>
+    </section>
+    <section>
+      <form>
+        <label for="">
+          <input type="range" min="10" max="100">
+          Lenght
+        </label>
+        <label for="low-letters">
+          <input type="checkbox" name="letters" id="low-letters">
+          LowerCase Letters
+        </label>
+        <label for="up-letters">
+          <input type="checkbox" name="letters" id="up-letters">
+          UpperCase Letters
+        </label>
+        <label for="numbers">
+          <input type="checkbox" name="numbers" id="numbers">
+          Numbers
+        </label>
+        <label for="symbols">
+          <input type="checkbox" name="symbols" id="symbols">
+          Symbols
+        </label>
+        <label for="words">
+          <input type="checkbox" name="words" id="words">
+          Words
+        </label>
+        <button>Generate</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="./js/main.js"></script>
+</body>
+
+</html>
