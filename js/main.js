@@ -80,11 +80,16 @@ const symbols = [
 	'}',
 ];
 
+const API = 'https://clientes.api.greenborn.com.ar/public-random-word';
+
 const form = document.querySelector('#form');
 const lengthInput = document.querySelector('#length');
 const lengthSpan = document.querySelector('#show-length');
 const passwordSpan = document.querySelector('#password');
 const copyButton = document.querySelector('#copy-to-clipboard');
+const modal = document.querySelector('#modal');
+const modalText = document.querySelector('#modal-text');
+const closeModalButton = document.querySelector('#close-modal');
 
 lengthSpan.innerText = lengthInput.value;
 
@@ -117,11 +122,23 @@ function randomNumber(min, max) {
 function copyToClipboard(target) {
 	const element = document.querySelector(target);
 	const value = element.value;
-
-	window.navigator.clipboard.writeText(value);
+	if (value.length) {
+		window.navigator.clipboard.writeText(value);
+		modalText.innerText = 'Your password has been copied to the clipboard';
+		modal.classList.remove('hidden');
+	} else {
+		modalText.innerText = 'You need to generate your password';
+		modal.classList.remove('hidden');
+	}
 }
 
-lengthInput.addEventListener('change', () => (lengthSpan.innerText = lengthInput.value));
+function fetchWords(API, quantity) {
+	fetch(`${API}?c=${quantity}`)
+		.then(res => res.json())
+		.then(data => console.log(data));
+}
+
+lengthInput.addEventListener('input', () => (lengthSpan.innerText = lengthInput.value));
 
 form.addEventListener('submit', event => {
 	event.preventDefault();
@@ -131,3 +148,5 @@ form.addEventListener('submit', event => {
 copyButton.addEventListener('click', () => {
 	copyToClipboard('#password');
 });
+
+closeModalButton.addEventListener('click', () => modal.classList.add('hidden'));

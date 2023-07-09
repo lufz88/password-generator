@@ -20,7 +20,9 @@
         <li class="list--item">Select what type of characters you want</li>
         <li class="list--item">Then, click the button to generate your secure password</li>
       </ol>
-      <p class="main--paragraph">Your password is:</p>
+    </section>
+    <section class="main--password-container">
+      <p class="password-container--paragraph">Your password is:</p>
       <input type="text" disabled id="password"></input>
       <button type="button" id="copy-to-clipboard">Copy to clipboard</button>
     </section>
@@ -54,6 +56,12 @@
       </form>
     </section>
   </main>
+  <div class="modal hidden" id="modal">
+    <div class="modal--text-container">
+      <p id="modal-text"></p>
+      <button id="close-modal">Close</button>
+    </div>
+  </div>
 
   <script src="./js/main.js"></script>
 </body>

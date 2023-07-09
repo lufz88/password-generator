@@ -25,19 +25,28 @@ header {
 	margin-bottom: 24px;
 }
 
-.main--instructions-container {
+label {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 8px;
+}
+
+.main--instructions-container,
+.main--password-container {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 }
 
-.main--instructions-container .main--paragraph {
+.main--password-container .password-container--paragraph {
 	margin-top: 8px;
 }
 
-.main--instructions-container input {
+.main--password-container input {
 	margin-top: 16px;
+	margin-bottom: 16px;
 	width: 80%;
 	height: 20px;
 	text-align: center;
@@ -49,4 +58,39 @@ form {
 	margin-top: 24px;
 	display: flex;
 	flex-direction: column;
+}
+
+.modal {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+	background-color: #00145c77;
+}
+
+.modal .modal--text-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 400px;
+	height: 250px;
+	background-color: #00114d;
+	border: 2px solid #3a497e;
+	border-radius: 4px;
+}
+
+.modal .modal--text-container p {
+	font-size: 24px;
+	text-align: center;
+}
+
+.hidden {
+	display: none;
 }
