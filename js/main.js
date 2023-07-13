@@ -80,11 +80,20 @@ const symbols = [
 	'}',
 ];
 
-const API = 'https://clientes.api.greenborn.com.ar/public-random-word';
+const API = 'https://random-word-api.herokuapp.com/word';
 
 const form = document.querySelector('#form');
+
+const lowLettersCheckbox = document.querySelector('#low-letters');
+const upLettersCheckbox = document.querySelector('#up-letters');
+const numbersCheckbox = document.querySelector('#numbers');
+const symbolsCheckbox = document.querySelector('#symbols');
+const wordsCheckbox = document.querySelector('#words');
+
 const lengthInput = document.querySelector('#length');
 const lengthSpan = document.querySelector('#show-length');
+const wordsQuantityInput = document.querySelector('#words-quantity');
+const wordsQuantity = document.querySelector('#show-words-quantity');
 const passwordSpan = document.querySelector('#password');
 const copyButton = document.querySelector('#copy-to-clipboard');
 const modal = document.querySelector('#modal');
@@ -92,26 +101,40 @@ const modalText = document.querySelector('#modal-text');
 const closeModalButton = document.querySelector('#close-modal');
 
 lengthSpan.innerText = lengthInput.value;
+wordsQuantity.innerText = wordsQuantityInput.value;
 
-function generatePassword(target, length) {
-	const passwordLength = length;
+let words;
+
+function generatePassword(target, charLength, wordsLength) {
+	let passwordLength;
 	let password = '';
 	const charactersIncluded = [];
-	target.upLetters.checked && charactersIncluded.push(upperCaseLetters);
-	target.lowLetters.checked && charactersIncluded.push(lowerCaseLetters);
-	target.numbers.checked && charactersIncluded.push(numbers);
-	target.symbols.checked && charactersIncluded.push(symbols);
 
-	if (charactersIncluded.length < 1) {
-		alert('Seleccioná algo loco');
-		return;
+	if (!wordsCheckbox.checked) {
+		passwordLength = charLength;
+		target.upLetters.checked && charactersIncluded.push(upperCaseLetters);
+		target.lowLetters.checked && charactersIncluded.push(lowerCaseLetters);
+		target.numbers.checked && charactersIncluded.push(numbers);
+		target.symbols.checked && charactersIncluded.push(symbols);
+
+		if (charactersIncluded.length < 1) {
+			modalText.innerText = 'You must select at least one option';
+			modal.classList.remove('hidden');
+			return;
+		}
+		for (let i = 0; i < passwordLength; i++) {
+			const characterArray = charactersIncluded[randomNumber(0, charactersIncluded.length)];
+			const character = characterArray[randomNumber(0, characterArray.length)];
+			password += character;
+		}
+	} else {
+		passwordLength = wordsLength;
+		for (let i = 0; i < passwordLength; i++) {
+			charactersIncluded.push(words[randomNumber(0, words.length)]);
+		}
+		password = charactersIncluded.join('.');
 	}
 
-	for (let i = 0; i < passwordLength; i++) {
-		const characterArray = charactersIncluded[randomNumber(0, charactersIncluded.length)];
-		const character = characterArray[randomNumber(0, characterArray.length)];
-		password += character;
-	}
 	passwordSpan.value = password;
 }
 
@@ -133,16 +156,43 @@ function copyToClipboard(target) {
 }
 
 function fetchWords(API, quantity) {
-	fetch(`${API}?c=${quantity}`)
+	fetch(`${API}?number=${quantity}`)
 		.then(res => res.json())
-		.then(data => console.log(data));
+		.then(data => {
+			words = data;
+		});
 }
 
+fetchWords(API, 100);
+
+wordsCheckbox.addEventListener('click', () => {
+	lowLettersCheckbox.checked = false;
+	upLettersCheckbox.checked = false;
+	numbersCheckbox.checked = false;
+	symbolsCheckbox.checked = false;
+});
+lowLettersCheckbox.addEventListener('click', () => {
+	wordsCheckbox.checked = false;
+});
+upLettersCheckbox.addEventListener('click', () => {
+	wordsCheckbox.checked = false;
+});
+numbersCheckbox.addEventListener('click', () => {
+	wordsCheckbox.checked = false;
+});
+symbolsCheckbox.addEventListener('click', () => {
+	wordsCheckbox.checked = false;
+});
+
 lengthInput.addEventListener('input', () => (lengthSpan.innerText = lengthInput.value));
+wordsQuantityInput.addEventListener(
+	'input',
+	() => (wordsQuantity.innerText = wordsQuantityInput.value)
+);
 
 form.addEventListener('submit', event => {
 	event.preventDefault();
-	generatePassword(event.target, event.target.length.value);
+	generatePassword(event.target, event.target.length.value, event.target.wordsQuantity.value);
 });
 
 copyButton.addEventListener('click', () => {

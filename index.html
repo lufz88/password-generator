@@ -28,7 +28,7 @@
     </section>
     <section>
       <form id="form">
-        <label for="">
+        <label for="length">
           <input type="range" name="length" min="10" max="100" id="length">
           Length: <span id="show-length"></span>
         </label>
@@ -51,6 +51,10 @@
         <label for="words">
           <input type="checkbox" name="words" id="words">
           Words
+        </label>
+        <label for="words-quantity">
+          <input type="range" name="wordsQuantity" min="3" max="10" id="words-quantity">
+          Words quantity: <span id="show-words-quantity"></span>
         </label>
         <button>Generate</button>
       </form>
